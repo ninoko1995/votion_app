@@ -31,4 +31,14 @@ class InvestmentsController < ApplicationController
 
   def edit
   end
+
+  def show
+    @candidates=Candidate.all
+    @candidates.each do |candidate|
+      @investments = Investment.where(candidate_id: candidate.id)
+      @investments.each do |investment|
+        candidate.money += investment.money
+      end
+    end
+  end
 end

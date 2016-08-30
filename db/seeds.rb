@@ -11,6 +11,7 @@ User.create!(name:00000000,
 
 10.times do |n|
   Candidate.create!(
-      name: "team-#{n}"
+      name: "team-#{n}",
+      money: 0
     ) 
 end

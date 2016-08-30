@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20160829145314) do
 
   create_table "candidates", force: :cascade do |t|
     t.string   "name"
+    t.integer  "money"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

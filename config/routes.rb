@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "/users/end" =>"users#end"
   resources :users,only:[:new,:create,:end]
   resources :candidates,only:[:new,:create]
-  resources :investments,only:[:new,:create]
+  resources :investments,only:[:new,:create,:show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
