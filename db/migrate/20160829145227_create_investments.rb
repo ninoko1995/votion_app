@@ -7,5 +7,8 @@ class CreateInvestments < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :investments, :user_id
+    add_index :investments, :candidate_id
+    add_index :investments, [:user_id, :candidate_id], unique: true
   end
 end

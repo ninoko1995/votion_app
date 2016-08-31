@@ -5,13 +5,22 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create!(name:00000000,
+User.create!(name:20142024,
               admin: true
   )
 
+a = ["A","B","C","D","E","F","G","H","I"]
+
+9.times do |n|
+  Candidate.create!(
+      name: "団体班-#{a[n]}",
+      money: 0
+    )
+end
+
 10.times do |n|
   Candidate.create!(
-      name: "team-#{n}",
+      name: "会社班-#{n+1}",
       money: 0
     ) 
 end

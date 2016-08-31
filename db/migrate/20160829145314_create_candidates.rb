@@ -3,7 +3,6 @@ class CreateCandidates < ActiveRecord::Migration
     create_table :candidates do |t|
       t.string :name
       t.integer :money
-
       t.timestamps null: false
     end
   end

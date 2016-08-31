@@ -4,10 +4,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user=User.new
-    @user.name=params[:user][:name]
-    @user.save
-    redirect_to new_investment_path
+    if User.find_by(name: params[:session][:name]).blank?
+      @user=User.new
+      @user.name=params[:session][:name]
+      @user.save
+    else
+      @user = User.find_by(name: params[:session][:name])
+    end
+      log_in @user
+      redirect_to new_investment_path
   end
 
   def end
@@ -21,17 +26,19 @@ class UsersController < ApplicationController
   end
 
   def index
+    @users = User.all
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def destroy
   end
 
-  private
-    def user_params
-      params.require(:user).permit(:name)
-    end
+  # private
+  #   def user_params
+  #     params.require(:user).permit(:name)
+  #   end
 
 end

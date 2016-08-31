@@ -1,2 +1,12 @@
-<h1>Investments#index</h1>
-<p>Find me in app/views/investments/index.html.erb</p>
+<table>
+  <tr>
+    <td>会社名</td>
+    <td>投資金額合計</td>
+  </tr>
+  <% @candidates.each do |candidate| %>
+  <tr>
+    <th><%= candidate.name %></th>
+    <th><%= candidate.money %></th>
+  </tr>
+  <% end %>
+</table>

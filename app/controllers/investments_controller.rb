@@ -32,7 +32,7 @@ class InvestmentsController < ApplicationController
   def edit
   end
 
-  def show
+  def index
     @candidates=Candidate.all
     @candidates.each do |candidate|
       @investments = Investment.where(candidate_id: candidate.id)
