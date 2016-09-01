@@ -3,11 +3,13 @@
     <tr>
       <th>名前</th>
       <th>獲得額</th>
+      <th>獲得希望者数</th>
     </tr>
     <% @candidates.each do |candidate| %>
     <tr>
       <td><%= candidate.name %></td>
       <td><%= candidate.money %></td>
+      <td><%= candidate.liking %></td>
     </tr>
     <% end %>
 </table>

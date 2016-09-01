@@ -8,4 +8,14 @@ module InvestmentsHelper
       end
     end
   end
+
+  def set_liking
+    @candidates=Candidate.all.order(:id)
+    @candidates.each do |candidate|
+      @likes = candidate.likes
+      @likes.each do |like|
+        candidate.liking += 1
+      end
+    end
+  end 
 end

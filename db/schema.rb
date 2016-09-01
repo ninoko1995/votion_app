@@ -15,9 +15,10 @@ ActiveRecord::Schema.define(version: 20160901035241) do
 
   create_table "candidates", force: :cascade do |t|
     t.string   "name"
-    t.integer  "money"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "money",      default: 0
+    t.integer  "liking",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "investments", force: :cascade do |t|
