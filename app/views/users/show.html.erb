@@ -1,2 +1,13 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1><%= @user.name %>さんの投資先一覧</h1>
+<table style="text-align:center;">
+    <tr>
+      <th>投資先</th>
+      <th>投資額</th>
+    </tr>
+    <% @candidates.each do |candidate| %>
+    <tr>
+      <td><%= candidate.name %></td>
+      <td><%= candidate.money %></td>
+    </tr>
+    <% end %>
+</table>

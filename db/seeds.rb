@@ -8,6 +8,27 @@
 User.create!(name:20142024,
               admin: true
   )
+User.create!(name:20142037,
+              admin: true
+  )
+User.create!(name:20142009,
+              admin: true
+  )
+User.create!(name:20132031,
+              admin: true
+  )
+User.create!(name:20132024,
+              admin: true
+  )
+User.create!(name:20132026,
+              admin: true
+  )
+User.create!(name:20132023,
+              admin: true
+  )
+User.create!(name:20132005,
+              admin: true
+  )
 
 a = ["A","B","C","D","E","F","G","H","I"]
 

@@ -4,9 +4,9 @@
     <td>投資金額合計</td>
   </tr>
   <% @candidates.each do |candidate| %>
-  <tr>
-    <th><%= candidate.name %></th>
-    <th><%= candidate.money %></th>
-  </tr>
+    <tr>
+      <th><%= @candidates.find_by(name: candidate.name).name %></th>
+      <th><%= @candidates.find_by(name: candidate.name).money %></th>
+    </tr>
   <% end %>
 </table>

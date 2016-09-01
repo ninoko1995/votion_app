@@ -11,11 +11,11 @@ module SessionsHelper
   #   cookies.permanent[:remember_token] = user.remember_token
   # end
 
-  # def forget(user)
-  #   user.forget
-  #   cookies.delete(:user_id)
-  #   cookies.delete(:remember_token)
-  # end
+  def forget(user)
+    user.forget
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
+  end
 
   def log_out
     forget(current_user)
@@ -37,6 +37,13 @@ module SessionsHelper
 
   def logged_in?
     !current_user.nil?
+  end
+
+  def check_log_in
+    if !logged_in?
+      ##how to set flash message
+      redirect_to root_path
+    end
   end
 
   def current_user?(user)

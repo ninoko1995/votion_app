@@ -1,7 +1,9 @@
 class InvestmentsController < ApplicationController
+  before_action :check_log_in, only:[:new,:like]
+
   def new
-    @investment=Investment.new
-    @candidates=Candidate.all
+      @investment=Investment.new
+      @candidates=Candidate.all
   end
 
   def create
@@ -19,26 +21,26 @@ class InvestmentsController < ApplicationController
       redirect_to new_investment_path
     else
       @candidates.each do |candidate|
-        @investment=Investment.new
-        @investment.attributes = {:money => params[:investment][:"#{candidate.name}"].to_i,:candidate_id => candidate.id}
-        # @investment.user_id=current_user.id
-        @investment.save
+        candidate.investments.create(user_id: current_user.id,money: params[:investment][:"#{candidate.name}"].to_i)
       end
-      binding.pry
-      redirect_to users_end_path
+      #binding.pry
+      redirect_to likes_path
     end
   end
 
-  def edit
-  end
-
-  def index
+  def like
     @candidates=Candidate.all
-    @candidates.each do |candidate|
-      @investments = Investment.where(candidate_id: candidate.id)
-      @investments.each do |investment|
-        candidate.money += investment.money
-      end
+    @like = Like.new
+  end
+
+  def like_set
+    if params[:like][:candidate].count != 1
+      redirect_to likes_path
+    else
+      current_user.likes.create(candidate_id: params[:like][:candidate])
+      redirect_to end_path
     end
   end
+
+  
 end
