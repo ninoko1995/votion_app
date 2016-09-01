@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
-  before_action :check_log_in, only:[:end,:index,:show]
+  before_action :check_log_in, only: :end
+  before_action :check_admin,only:[:index,:admin_index,:show]
+
   def new
     @user=User.new
   end
 
   def create
     if User.find_by(name: params[:session][:name]).blank?
-      @user=User.new
-      @user.name=params[:session][:name]
-      @user.save
+      @user=User.create(name:params[:session][:name])
       log_in @user
       redirect_to new_investment_path
     else
@@ -17,21 +17,13 @@ class UsersController < ApplicationController
       if @user.admin == true
         redirect_to candidates_path
       else
-        #how to set flash message?
-        flash = "すでに投票いただきました。"
-        redirect_to user_end_path
+        redirect_to end_path,success:"すでに投票いただきました。"
       end
     end
   end
 
   def end
     log_out if !logged_in?
-  end
-
-  def edit
-  end 
-  
-  def update
   end
 
   def index
@@ -47,6 +39,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @candidates = @user.candidates.order(:money)
   end
+
+  # def edit
+  # end 
+  
+  # def update
+  # end
 
   # def destroy
   # end

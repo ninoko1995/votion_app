@@ -42,12 +42,17 @@ module SessionsHelper
   def check_log_in
     if !logged_in?
       ##how to set flash message
-      redirect_to root_path
+      redirect_to root_path,danger:"権限を有していません。"
     end
   end
 
   def current_user?(user)
     user == current_user
+  end
+
+  def check_admin
+    check_log_in
+    redirect_to root_path if current_user.admin == false
   end
 
   # 記憶したURL (もしくはデフォルト値) にリダイレクト

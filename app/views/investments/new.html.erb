@@ -1,16 +1,20 @@
-<% flash.each do |message_type, message| %>
-  <div class="alert alert-<%= message_type %>"><%= message %></div>
-<% end %>
-
 <h1>投資フォーム</h1>
 <p><%= "こんにちは#{current_user.name}さん！" if logged_in? %></p>
 <p>あなたは100万円持っています。</p>
 <p>100万円を自由に使ってください。</p>
 
 <%= form_for(@investment) do |f| %>
-  <% @candidates.each do |candidate| %>
-        <%= f.label :"#{candidate.name}" %>
-        <%= f.number_field :"#{candidate.name}", :value => 0,class: 'form-control' %>
-  <% end %>
+  <table>
+    <tr>
+      <th>名前</th>
+      <th>投資金額</th>
+    </tr>
+    <% @candidates.each do |candidate| %>
+      <tr>
+        <td><%= f.label :"#{candidate.name}" %></td>
+        <td><%= f.number_field :"#{candidate.name}", :value => 0,class: 'form-control' %><br></td>
+      </tr>
+    <% end %>
+  </table>
   <%= f.submit "投資する", class: "btn btn-primary" %>
 <% end %>
