@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def end
-    log_out if !logged_in?
+    log_out if logged_in?
   end
 
   def index
