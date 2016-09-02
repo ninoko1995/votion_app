@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :check_log_in, only: :end
   before_action :check_admin,only:[:index,:admin_index,:show]
 
   def new
@@ -17,13 +16,12 @@ class UsersController < ApplicationController
       if @user.admin == true
         redirect_to candidates_path
       else
-        redirect_to end_path,success:"すでに投票いただきました。"
+        redirect_to end_url,success:"すでに投票いただきました。"
       end
     end
   end
 
   def end
-    log_out if logged_in?
   end
 
   def index
@@ -37,7 +35,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @candidates = @user.candidates.order(:money)
+    @investments = @user.investments.order(money: :desc)
   end
 
   # def edit

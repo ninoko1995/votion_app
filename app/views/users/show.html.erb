@@ -1,13 +1,17 @@
+<%= render "layouts/header" %>
 <h1><%= @user.name %>さんの投資先一覧</h1>
 <table style="text-align:center;">
     <tr>
       <th>投資先</th>
       <th>投資額</th>
+      <th>投票先</th>
     </tr>
-    <% @candidates.each do |candidate| %>
+    <% @investments.each do |investment| %>
+    <% candidate = Candidate.find(investment.candidate_id) %>
     <tr>
       <td><%= candidate.name %></td>
-      <td><%= candidate.money %></td>
+      <td><%= investment.money %></td>
+      <td><%= "★" if candidate.id == Like.find_by(user_id: investment.user_id).candidate_id  %></td>
     </tr>
     <% end %>
 </table>

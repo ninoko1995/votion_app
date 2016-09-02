@@ -4,12 +4,12 @@ module SessionsHelper
     session[:user_id]=user.id
   end
 
-  # ユーザーを永続的セッションに記憶する
-  # def remember(user)
-  #   user.remember
-  #   cookies.permanent.signed[:user_id] = user.id
-  #   cookies.permanent[:remember_token] = user.remember_token
-  # end
+  #ユーザーを永続的セッションに記憶する
+  def remember(user)
+    user.remember
+    cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
+  end
 
   def forget(user)
     user.forget
@@ -42,7 +42,7 @@ module SessionsHelper
   def check_log_in
     if !logged_in?
       ##how to set flash message
-      redirect_to root_path,danger:"権限を有していません。"
+      redirect_to root_path,danger:"ログインしていません"
     end
   end
 
@@ -52,7 +52,9 @@ module SessionsHelper
 
   def check_admin
     check_log_in
-    redirect_to root_path if current_user.admin == false
+    if current_user.admin == false
+      redirect_to root_path,danger:"権限を有していません。"
+    end
   end
 
   # 記憶したURL (もしくはデフォルト値) にリダイレクト

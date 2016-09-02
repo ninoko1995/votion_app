@@ -16,14 +16,14 @@ class InvestmentsController < ApplicationController
     end
   
     if @sum_investment > 100
-      redirect_to new_investment_path,warning:"投資できるのは合計100万円までです。"
+      redirect_to new_investment_url,warning:"投資できるのは合計100万円までです。"
     else
       @candidates.each do |candidate|
         candidate.investments.create(user_id: current_user.id,money: params[:investment][:"#{candidate.name}"].to_i)
         candidate.money+=params[:investment][:"#{candidate.name}"].to_i
         candidate.save
       end
-      redirect_to likes_path
+      redirect_to likes_url
     end
   end
 
@@ -41,7 +41,7 @@ class InvestmentsController < ApplicationController
       @candidate = Candidate.find(params[:like][:candidate][0].to_i)
       @candidate.liking+=1
       @candidate.save
-      redirect_to end_path
+      redirect_to end_url
     end
   end
 

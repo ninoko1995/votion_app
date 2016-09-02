@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :users,only:[:new,:create,:index,:show]
   resources :candidates,only:[:index]
   resources :investments,only:[:new,:create,:edit,:update]
-  get '/end' => 'users#end'
+  get 'end' => 'users#end'
+  delete 'logout' => 'investments#destroy_session'
   get '/admin_users' => 'users#admin_index'
   get '/likes' => 'investments#like'
   post '/likes' => 'investments#like_set'
