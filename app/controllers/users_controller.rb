@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :check_admin,only:[:index,:admin_index,:show]
+  before_action :get_all_users,only:[:index,:admin_index]
 
   def new
     @user=User.new
@@ -7,9 +8,14 @@ class UsersController < ApplicationController
 
   def create
     if User.find_by(name: params[:session][:name]).blank?
-      @user=User.create(name:params[:session][:name])
-      log_in @user
-      redirect_to new_investment_path
+      @user=User.new(name: params[:session][:name])
+      if @user.valid?
+        @user.save
+        log_in @user
+        redirect_to new_investment_path
+      else
+        redirect_to new_user_path,warning:"正しい番号を入力してください"
+      end
     else
       @user = User.find_by(name: params[:session][:name])
       log_in @user
@@ -25,11 +31,9 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.order(:name)
   end
 
   def admin_index
-    @users = User.order(:name)
   end
 
 
@@ -47,9 +51,14 @@ class UsersController < ApplicationController
   # def destroy
   # end
 
-  # private
-  #   def user_params
-  #     params.require(:user).permit(:name)
-  #   end
+  private
+    def user_params
+      params.require(:session).permit(:name)
+    end
+
+    def get_all_users
+      @users = User.order(:name)
+    end
+
 
 end

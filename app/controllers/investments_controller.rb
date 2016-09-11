@@ -32,23 +32,18 @@ class InvestmentsController < ApplicationController
   end
 
   def like_set
-    if params[:like].nil?
-      redirect_to likes_path,warning:"どこか一つを選んでください"
-    elsif params[:like][:candidate].count != 1
-      redirect_to likes_path,warning:"どこか一つを選んでください"
-    else
-      current_user.likes.create(candidate_id: params[:like][:candidate][0].to_i)
-      @candidate = Candidate.find(params[:like][:candidate][0].to_i)
-      @candidate.liking+=1
-      @candidate.save
-      redirect_to end_url
-    end
+    # binding.pry
+    current_user.likes.create(candidate_id: params[:like][:candidate].to_i)
+    @candidate = Candidate.find(params[:like][:candidate].to_i)
+    @candidate.liking+=1
+    @candidate.save
+    redirect_to end_url
   end
 
   private
    
     def set_candidates
-      @candidates = Candidate.all
+      @candidates = Candidate.all.order(:id)
     end
 
 end

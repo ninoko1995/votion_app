@@ -5,6 +5,6 @@ class User < ActiveRecord::Base
   validates :name,
             presence: true ,
             uniqueness: true, 
-            length:{is: 8},
-            numericality:{only_integer: true}
+            numericality:{only_integer: true},
+            length:{is: 8}
 end

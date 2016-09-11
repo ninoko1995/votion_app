@@ -7,12 +7,12 @@
   <table>
     <tr>
       <th>名前</th>
-      <th>投資金額</th>
+      <th>投資金額(万円)</th>
     </tr>
     <% @candidates.each do |candidate| %>
       <tr>
         <td><%= f.label :"#{candidate.name}" %></td>
-        <td><%= f.number_field :"#{candidate.name}", :value => 0,class: 'form-control' %><br></td>
+        <td><%= f.number_field :"#{candidate.name}", :value => 0,class: 'form-control' %>万円</td>
       </tr>
     <% end %>
   </table>

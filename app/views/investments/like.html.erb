@@ -3,9 +3,6 @@
 <p>次に、自分が一番働きたいと思った会社を1つ選び、1票を投じてください！</p>
 
 <%= form_for(@like) do |f| %>
-  <% @candidates.each do |candidate| %>
-    <%= f.check_box :candidate,{multiple: true},candidate.id, nil %>
-    <%= f.label candidate.name %><br>
-  <% end %>
+    <%= f.collection_select :candidate,Candidate.all,:id, :name %>
   <%= f.submit "投票する", class: "btn btn-primary"%>
 <% end %>
