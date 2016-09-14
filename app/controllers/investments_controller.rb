@@ -3,7 +3,11 @@ class InvestmentsController < ApplicationController
   before_action :set_candidates,only:[:new,:create,:like]
 
   def new
+    if Investment.where(user_id: current_user.id).empty? 
       @investment=Investment.new
+    elsif
+      redirect_to likes_path
+    end
   end
 
   def create
@@ -28,7 +32,11 @@ class InvestmentsController < ApplicationController
   end
 
   def like
-    @like = Like.new
+    if Like.where(user_id: current_user.id).empty? 
+      @like=Like.new
+    elsif
+      redirect_to end_path
+    end
   end
 
   def like_set

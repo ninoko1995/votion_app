@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       if @user.admin == true
         redirect_to candidates_path
       else
-        redirect_to end_url,success:"すでに投票いただきました。"
+        redirect_to new_investment_path
       end
     end
   end
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @investments = @user.investments.order(money: :desc)
+    @investments = @user.investments.order(id: :desc)
   end
 
   # def edit
