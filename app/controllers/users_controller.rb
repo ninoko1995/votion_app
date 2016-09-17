@@ -40,6 +40,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @investments = @user.investments.order(id: :desc)
+
+    #これはもともとhtmlのほうに書いてあったやつ
+    # <td><%= "★" if candidate.id == Like.find_by(user_id: investment.user_id).candidate_id  %></td>
+      
   end
 
   # def edit

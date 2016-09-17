@@ -6,7 +6,7 @@ class InvestmentsController < ApplicationController
     if Investment.where(user_id: current_user.id).empty? 
       @investment=Investment.new
     elsif
-      redirect_to likes_path
+      redirect_to end_path,waring:"すでに投票いただきました。"
     end
   end
 
@@ -27,7 +27,7 @@ class InvestmentsController < ApplicationController
         candidate.money+=params[:investment][:"#{candidate.name}"].to_i
         candidate.save
       end
-      redirect_to likes_url
+      redirect_to end_url
     end
   end
 

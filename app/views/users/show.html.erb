@@ -4,14 +4,13 @@
     <tr>
       <th>投資先</th>
       <th>投資額</th>
-      <th>投票先</th>
+      <!-- <th>投票先</th> -->
     </tr>
     <% @investments.each do |investment| %>
     <% candidate = Candidate.find(investment.candidate_id) %>
     <tr>
       <td><%= candidate.name %></td>
       <td><%= investment.money %></td>
-      <td><%= "★" if candidate.id == Like.find_by(user_id: investment.user_id).candidate_id  %></td>
     </tr>
     <% end %>
 </table>
