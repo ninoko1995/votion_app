@@ -42,15 +42,16 @@ class UsersController < ApplicationController
     @investments = @user.investments.order(id: :desc)
 
     #これはもともとhtmlのほうに書いてあったやつ
-    # <td><%= "★" if candidate.id == Like.find_by(user_id: investment.user_id).candidate_id  %></td>
-      
+    # <td><%= "★" if candidate.id == Like.find_by(user_id: investment.user_id).candidate_id  %></td>    
   end
 
-  # def edit
-  # end 
+  def edit
+    @user = User.find(params[:id])
+    @investments = @user.investments.order(id: :desc)
+  end 
   
-  # def update
-  # end
+  def update
+  end
 
   # def destroy
   # end

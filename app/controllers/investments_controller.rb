@@ -6,7 +6,7 @@ class InvestmentsController < ApplicationController
     if Investment.where(user_id: current_user.id).empty? 
       @investment=Investment.new
     elsif
-      redirect_to end_path,waring:"すでに投票いただきました。"
+      redirect_to edit_user_path(current_user)
     end
   end
 

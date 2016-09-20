@@ -1,0 +1,17 @@
+<h1><%= @user.name %>さんの投資先編集</h1>
+
+<%= form_for(@investment) do |f| %>
+  <table>
+    <tr>
+      <th>投資先</th>
+      <th>投資額(万円)</th>
+    </tr>
+    <% @investments.each do |investment| %>
+      <tr>
+        <td><%= f.label :"#{investment.candidate.name}" %></td>
+        <td><%= f.number_field :"#{inveestment.candidate.name}", class: 'form-control' %>万円</td>
+      </tr>
+    <% end %>
+  </table>
+  <%= f.submit "投資する", class: "btn btn-primary"%>
+<% end %>

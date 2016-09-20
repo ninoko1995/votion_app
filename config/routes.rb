@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   root 'users#new'
-  resources :users,only:[:new,:create,:index,:show]
+  resources :users,only:[:new,:create,:index,:show,:edit,:update]
   resources :candidates,only:[:index]
   resources :investments,only:[:new,:create,:edit,:update]
   get 'end' => 'users#end'
