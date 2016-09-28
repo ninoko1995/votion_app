@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   root 'users#new'
-  resources :users,only:[:new,:create,:index,:show,:edit,:update]
+  resources :users,only:[:new,:create,:destroy,:show,:index]
   resources :candidates,only:[:index]
   resources :investments,only:[:new,:create,:edit,:update]
   get 'end' => 'users#end'
@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get '/admin_users' => 'users#admin_index'
   get '/likes' => 'investments#like'
   post '/likes' => 'investments#like_set'
+
+  
   # post "login/:id" => "sessions#create", :as => "login"
   # delete "logout" => "sessions#destory"
  

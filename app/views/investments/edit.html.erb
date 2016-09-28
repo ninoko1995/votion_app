@@ -1,6 +1,6 @@
 <h1><%= @user.name %>さんの投資先編集</h1>
 
-<%= form_for(@investment) do |f| %>
+<%= form_for(@investment,url: investment_path(@user), html: {method: "patch"}) do |f| %>
   <table>
     <tr>
       <th>投資先</th>
@@ -9,9 +9,9 @@
     <% @investments.each do |investment| %>
       <tr>
         <td><%= f.label :"#{investment.candidate.name}" %></td>
-        <td><%= f.number_field :"#{inveestment.candidate.name}", class: 'form-control' %>万円</td>
+        <td><%= f.number_field :"#{investment.candidate.name}",:value => investment.money,class: 'form-control' %>万円</td>
       </tr>
     <% end %>
   </table>
-  <%= f.submit "投資する", class: "btn btn-primary"%>
+  <%= f.submit "編集する", class: "btn btn-primary"%>
 <% end %>

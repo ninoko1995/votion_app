@@ -1,14 +1,18 @@
 class UsersController < ApplicationController
-  before_action :check_admin,only:[:index,:admin_index,:show]
+  before_action :check_admin,only:[:index,:admin_index,:destroy]
   before_action :get_all_users,only:[:index,:admin_index]
-
+  before_action :set_user,only:[:show,:edit]
+  
   def new
+    if !current_user.blank?
+      log_out
+    end
     @user=User.new
   end
 
   def create
     if User.find_by(name: params[:session][:name]).blank?
-      @user=User.new(name: params[:session][:name])
+      @user=User.new(user_params)
       if @user.valid?
         @user.save
         log_in @user
@@ -22,7 +26,7 @@ class UsersController < ApplicationController
       if @user.admin == true
         redirect_to candidates_path
       else
-        redirect_to new_investment_path
+        redirect_to user_path(@user)
       end
     end
   end
@@ -38,23 +42,17 @@ class UsersController < ApplicationController
 
 
   def show
-    @user = User.find(params[:id])
-    @investments = @user.investments.order(id: :desc)
+    @investments = @user.investments.order(id: :asc)
 
     #これはもともとhtmlのほうに書いてあったやつ
     # <td><%= "★" if candidate.id == Like.find_by(user_id: investment.user_id).candidate_id  %></td>    
   end
 
-  def edit
-    @user = User.find(params[:id])
-    @investments = @user.investments.order(id: :desc)
-  end 
-  
-  def update
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted"
+    redirect_to candidates_url
   end
-
-  # def destroy
-  # end
 
   private
     def user_params
@@ -65,5 +63,7 @@ class UsersController < ApplicationController
       @users = User.order(:name)
     end
 
-
+    def set_user
+      @user = User.find(params[:id])
+    end
 end

@@ -8,7 +8,12 @@
     <% @candidates.each do |candidate| %>
     <tr>
       <td><%= candidate.name %></td>
-      <td><%= candidate.money %></td>
+      <% candidate_money = 0 %>
+      <% @investments = candidate.investments %>
+      <% @investments.each do |investment| %>
+        <% candidate_money += investment.money %>
+      <% end %>
+      <td><%= candidate_money %></td>
       <!-- <td><%= candidate.liking %></td> -->
     </tr>
     <% end %>
